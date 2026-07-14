@@ -68,15 +68,15 @@ class GuestDashboard extends Component
         }
 
         if ($this->dateFrom) {
-            $query->whereDate('created_at', '>=', $this->dateFrom);
+            $query->where('tanggal_kunjungan', '>=', $this->dateFrom);
         }
 
         if ($this->dateTo) {
-            $query->whereDate('created_at', '<=', $this->dateTo);
+            $query->where('tanggal_kunjungan', '<=', $this->dateTo);
         }
 
-        $guests = $query->latest()->paginate(15);
-        $todayCount = Guest::today()->count();
+        $guests = $query->latest('tanggal_kunjungan')->latest('jam_kunjungan')->paginate(15);
+        $todayCount = Guest::where('tanggal_kunjungan', now()->toDateString())->count();
         $totalCount = Guest::count();
         $notifiedCount = Guest::where('notified', true)->count();
 

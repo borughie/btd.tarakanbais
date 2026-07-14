@@ -64,6 +64,32 @@
                             @enderror
                         </div>
 
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="tanggal_kunjungan"
+                                    class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">
+                                    Tanggal Kunjungan <span class="text-[#B3202E]">*</span>
+                                </label>
+                                <input type="date" id="tanggal_kunjungan" wire:model="tanggal_kunjungan"
+                                    class="w-full px-4 py-3 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B]" />
+                                @error('tanggal_kunjungan')
+                                    <p class="text-[#B3202E] text-xs mt-1.5">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="jam_kunjungan"
+                                    class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">
+                                    Jam Kunjungan <span class="text-[#B3202E]">*</span>
+                                </label>
+                                <input type="time" id="jam_kunjungan" wire:model="jam_kunjungan"
+                                    class="w-full px-4 py-3 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B]" />
+                                @error('jam_kunjungan')
+                                    <p class="text-[#B3202E] text-xs mt-1.5">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div>
                             <label for="tujuan"
                                 class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">

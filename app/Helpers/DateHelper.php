@@ -43,4 +43,48 @@ class DateHelper
 
         return "{$day} {$month} {$year} - {$hour12}:{$minute} {$period}";
     }
+
+    public static function formatDate(?string $date): string
+    {
+        if (! $date) {
+            return '-';
+        }
+
+        $dt = \Carbon\Carbon::parse($date);
+        $day = $dt->format('d');
+        $month = self::$months[(int) $dt->format('n')];
+        $year = $dt->format('Y');
+
+        return "{$day} {$month} {$year}";
+    }
+
+    public static function formatTime(?string $time): string
+    {
+        if (! $time) {
+            return '-';
+        }
+
+        $parts = explode(':', $time);
+        $hour = (int) ($parts[0] ?? 0);
+        $minute = $parts[1] ?? '00';
+
+        if ($hour < 6) {
+            $period = 'Pagi';
+        } elseif ($hour < 12) {
+            $period = 'Siang';
+        } elseif ($hour < 18) {
+            $period = 'Sore';
+        } else {
+            $period = 'Malam';
+        }
+
+        $hour12 = $hour > 12 ? $hour - 12 : ($hour === 0 ? 12 : $hour);
+
+        return "{$hour12}:{$minute} {$period}";
+    }
+
+    public static function formatDateTime(?string $date, ?string $time): string
+    {
+        return self::formatDate($date) . ' - ' . self::formatTime($time);
+    }
 }

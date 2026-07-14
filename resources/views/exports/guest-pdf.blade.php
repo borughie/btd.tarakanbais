@@ -30,12 +30,13 @@
     <table>
         <thead>
             <tr>
-                <th class="center" style="width:5%">No</th>
-                <th style="width:18%">Waktu</th>
-                <th style="width:20%">Instansi</th>
-                <th style="width:25%">Tujuan</th>
-                <th class="center" style="width:8%">Personil</th>
-                <th style="width:14%">PIC</th>
+                <th class="center" style="width:4%">No</th>
+                <th style="width:16%">Tanggal</th>
+                <th style="width:12%">Jam</th>
+                <th style="width:18%">Instansi</th>
+                <th style="width:22%">Tujuan</th>
+                <th class="center" style="width:6%">Personil</th>
+                <th style="width:12%">PIC</th>
                 <th style="width:10%">No. HP</th>
             </tr>
         </thead>
@@ -43,7 +44,8 @@
             @forelse ($guests as $i => $guest)
                 <tr>
                     <td class="center">{{ $i + 1 }}</td>
-                    <td>{{ \App\Helpers\DateHelper::formatIndonesian($guest->created_at) }}</td>
+                    <td>{{ \App\Helpers\DateHelper::formatDate($guest->tanggal_kunjungan) }}</td>
+                    <td>{{ \App\Helpers\DateHelper::formatTime($guest->jam_kunjungan) }}</td>
                     <td>{{ $guest->instansi }}</td>
                     <td>{{ $guest->tujuan }}</td>
                     <td class="center">{{ $guest->jumlah_personil }}</td>
@@ -52,7 +54,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7" style="text-align: center; padding: 30px;">Tidak ada data</td>
+                    <td colspan="8" style="text-align: center; padding: 30px;">Tidak ada data</td>
                 </tr>
             @endforelse
         </tbody>

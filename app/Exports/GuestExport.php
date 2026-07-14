@@ -45,7 +45,7 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
      */
     public function headings(): array
     {
-        return ['No', 'Waktu', 'Instansi', 'Tujuan', 'Jumlah Personil', 'Nama PIC', 'No. HP'];
+        return ['No', 'Tanggal', 'Jam', 'Instansi', 'Tujuan', 'Jumlah Personil', 'Nama PIC', 'No. HP'];
     }
 
     public function map($guest): array
@@ -54,7 +54,8 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
 
         return [
             $this->row,
-            DateHelper::formatIndonesian($guest->created_at),
+            \App\Helpers\DateHelper::formatDate($guest->tanggal_kunjungan),
+            \App\Helpers\DateHelper::formatTime($guest->jam_kunjungan),
             $guest->instansi,
             $guest->tujuan,
             $guest->jumlah_personil,
@@ -66,13 +67,14 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
     public function columnWidths(): array
     {
         return [
-            'A' => 8,
-            'B' => 28,
-            'C' => 30,
-            'D' => 40,
-            'E' => 15,
-            'F' => 20,
+            'A' => 6,
+            'B' => 22,
+            'C' => 16,
+            'D' => 30,
+            'E' => 40,
+            'F' => 15,
             'G' => 20,
+            'H' => 20,
         ];
     }
 
@@ -93,7 +95,7 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
                 $dataStart = $headerRow + 1;
                 $lastDataRow = $headerRow + $this->row;
 
-                $sheet->getStyle("A{$headerRow}:G{$headerRow}")->applyFromArray([
+                $sheet->getStyle("A{$headerRow}:H{$headerRow}")->applyFromArray([
                     'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
                     'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => 'B3202E']],
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
@@ -102,14 +104,14 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
                 $sheet->getRowDimension($headerRow)->setRowHeight(28);
 
                 if ($this->row > 0) {
-                    $sheet->getStyle("A{$dataStart}:G{$lastDataRow}")->applyFromArray([
+                    $sheet->getStyle("A{$dataStart}:H{$lastDataRow}")->applyFromArray([
                         'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'EEEEEE']]],
                         'alignment' => ['vertical' => Alignment::VERTICAL_CENTER],
                     ]);
 
                     for ($i = $dataStart; $i <= $lastDataRow; $i++) {
                         if (($i - $headerRow) % 2 === 0) {
-                            $sheet->getStyle("A{$i}:G{$i}")->applyFromArray([
+                            $sheet->getStyle("A{$i}:H{$i}")->applyFromArray([
                                 'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => 'FBEAEA']],
                             ]);
                         }
@@ -119,13 +121,13 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
                     $sheet->getStyle("A{$dataStart}:A{$lastDataRow}")->applyFromArray([
                         'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
                     ]);
-                    $sheet->getStyle("E{$dataStart}:E{$lastDataRow}")->applyFromArray([
+                    $sheet->getStyle("F{$dataStart}:F{$lastDataRow}")->applyFromArray([
                         'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
                     ]);
                 }
 
                 $sheet->freezePane("A{$dataStart}");
-                $sheet->setAutoFilter("A{$headerRow}:G{$lastDataRow}");
+                $sheet->setAutoFilter("A{$headerRow}:H{$lastDataRow}");
             },
         ];
     }
@@ -145,27 +147,27 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
             $drawing->setWorksheet($sheet);
         }
 
-        $sheet->mergeCells('B1:G1');
+        $sheet->mergeCells('B1:H1');
         $sheet->setCellValue('B1', 'SD Indo Tionghoa Tarakan');
         $sheet->getStyle('B1')->applyFromArray([
             'font' => ['bold' => true, 'size' => 14, 'color' => ['rgb' => 'B3202E']],
         ]);
 
-        $sheet->mergeCells('B2:G2');
+        $sheet->mergeCells('B2:H2');
         $sheet->setCellValue('B2', 'Buku Tamu Digital');
         $sheet->getStyle('B2')->applyFromArray([
             'font' => ['size' => 11, 'color' => ['rgb' => '6B5C5C']],
         ]);
 
-        $sheet->mergeCells('B3:G3');
+        $sheet->mergeCells('B3:H3');
         $sheet->setCellValue('B3', 'Data per: ' . DateHelper::formatIndonesian(now()));
         $sheet->getStyle('B3')->applyFromArray([
             'font' => ['size' => 9, 'color' => ['rgb' => '999999']],
         ]);
 
         // Row 4: thin colored rule under the letterhead, row 5 left blank as a spacer.
-        $sheet->mergeCells('A4:G4');
-        $sheet->getStyle('A4:G4')->applyFromArray([
+        $sheet->mergeCells('A4:H4');
+        $sheet->getStyle('A4:H4')->applyFromArray([
             'borders' => ['bottom' => ['borderStyle' => Border::BORDER_THICK, 'color' => ['rgb' => 'B3202E']]],
         ]);
 

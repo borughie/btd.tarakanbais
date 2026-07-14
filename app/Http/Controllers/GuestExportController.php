@@ -99,13 +99,14 @@ class GuestExportController extends Controller
 
         // Widths for portrait mode (~9,000 twip content width after margins)
         $columnWidths = [
-            'No' => 600,
-            'Waktu' => 1600,
-            'Instansi' => 2000,
-            'Tujuan' => 2500,
-            'Personil' => 800,
-            'PIC' => 1500,
-            'No. HP' => 1500,
+            'No' => 500,
+            'Tanggal' => 1400,
+            'Jam' => 1100,
+            'Instansi' => 1800,
+            'Tujuan' => 2200,
+            'Personil' => 700,
+            'PIC' => 1300,
+            'No. HP' => 1300,
         ];
 
         $table->addRow();
@@ -116,7 +117,8 @@ class GuestExportController extends Controller
         foreach ($guests as $i => $guest) {
             $table->addRow();
             $table->addCell($columnWidths['No'], $cellStyle)->addText((string) ($i + 1));
-            $table->addCell($columnWidths['Waktu'], $cellStyle)->addText(DateHelper::formatIndonesian($guest->created_at));
+            $table->addCell($columnWidths['Tanggal'], $cellStyle)->addText(DateHelper::formatDate($guest->tanggal_kunjungan));
+            $table->addCell($columnWidths['Jam'], $cellStyle)->addText(DateHelper::formatTime($guest->jam_kunjungan));
             $table->addCell($columnWidths['Instansi'], $cellStyle)->addText($guest->instansi);
             $table->addCell($columnWidths['Tujuan'], $cellStyle)->addText($guest->tujuan);
             $table->addCell($columnWidths['Personil'], $cellStyle)->addText((string) $guest->jumlah_personil);
@@ -175,11 +177,11 @@ class GuestExportController extends Controller
         }
 
         if ($request->filled('date_from')) {
-            $query->whereDate('created_at', '>=', $request->date_from);
+            $query->where('tanggal_kunjungan', '>=', $request->date_from);
         }
 
         if ($request->filled('date_to')) {
-            $query->whereDate('created_at', '<=', $request->date_to);
+            $query->where('tanggal_kunjungan', '<=', $request->date_to);
         }
 
         return $query->latest();

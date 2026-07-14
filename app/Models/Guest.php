@@ -18,6 +18,8 @@ class Guest extends Model
         'jumlah_personil',
         'nama_pic',
         'no_hp',
+        'tanggal_kunjungan',
+        'jam_kunjungan',
         'notified',
     ];
 
@@ -25,6 +27,7 @@ class Guest extends Model
     {
         return [
             'jumlah_personil' => 'integer',
+            'tanggal_kunjungan' => 'date',
             'notified' => 'boolean',
         ];
     }

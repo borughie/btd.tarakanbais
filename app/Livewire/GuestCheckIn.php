@@ -19,7 +19,17 @@ class GuestCheckIn extends Component
 
     public ?string $no_hp = null;
 
+    public ?string $tanggal_kunjungan = null;
+
+    public ?string $jam_kunjungan = null;
+
     public bool $submitted = false;
+
+    public function mount(): void
+    {
+        $this->tanggal_kunjungan = now()->format('Y-m-d');
+        $this->jam_kunjungan = now()->format('H:i');
+    }
 
     protected function rules(): array
     {
@@ -29,6 +39,8 @@ class GuestCheckIn extends Component
             'jumlah_personil' => 'nullable|integer|min:1|max:100',
             'nama_pic' => 'nullable|string|max:255',
             'no_hp' => 'nullable|string|max:20',
+            'tanggal_kunjungan' => 'required|date',
+            'jam_kunjungan' => 'required|string',
         ];
     }
 
@@ -42,6 +54,8 @@ class GuestCheckIn extends Component
             'jumlah_personil' => $this->jumlah_personil,
             'nama_pic' => $this->nama_pic,
             'no_hp' => $this->no_hp,
+            'tanggal_kunjungan' => $this->tanggal_kunjungan,
+            'jam_kunjungan' => $this->jam_kunjungan,
         ]);
 
         try {
@@ -55,11 +69,12 @@ class GuestCheckIn extends Component
         $this->reset([
             'instansi',
             'tujuan',
-            'jumlah_personil',
             'nama_pic',
             'no_hp',
         ]);
         $this->jumlah_personil = 1;
+        $this->tanggal_kunjungan = now()->format('Y-m-d');
+        $this->jam_kunjungan = now()->format('H:i');
     }
 
     public function resetForm(): void
