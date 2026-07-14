@@ -19,28 +19,27 @@
 <body class="bg-[#FBF9F9] text-[#241B1B] antialiased font-['Plus_Jakarta_Sans',sans-serif]">
     <nav class="bg-linear-to-r from-[#B3202E] to-[#7A1620] shadow-lg shadow-[#B3202E]/10 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-17">
-                <div class="flex items-center gap-3">
+            <div class="flex items-center justify-between h-16 sm:h-17">
+                <div class="flex items-center gap-2 sm:gap-3">
                     <div
-                        class="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-[#E8C468]/40 shrink-0 overflow-hidden">
+                        class="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-xl flex items-center justify-center border border-[#E8C468]/40 shrink-0 overflow-hidden">
                         <img src="{{ asset('img/logo.webp') }}" alt="Logo SD" class="w-full h-full object-contain p-0.5" />
                     </div>
                     <div class="leading-tight">
-                        <h1 class="font-['Fraunces',serif] text-white font-bold text-base">SD Indo Tionghoa Tarakan</h1>
-                        <p class="text-[#E8C468] text-[10px] font-semibold uppercase tracking-[0.15em] mt-0.5">Dashboard
-                            Admin</p>
+                        <h1 class="font-['Fraunces',serif] text-white font-bold text-sm sm:text-base">SD Indo Tionghoa</h1>
+                        <p class="text-[#E8C468] text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.15em] mt-0.5">Dashboard Admin</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5">
+                <div class="flex items-center gap-3 sm:gap-5">
                     <a href="{{ route('guest.checkin') }}"
-                        class="text-white/80 hover:text-white text-sm font-medium transition relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-[#E8C468] after:transition-all hover:after:w-full">
+                        class="text-white/80 hover:text-white text-xs sm:text-sm font-medium transition hidden sm:block relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-[#E8C468] after:transition-all hover:after:w-full">
                         Form Tamu
                     </a>
                     @auth
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                class="text-white/80 hover:text-white text-sm font-medium transition border border-white/20 hover:border-white/40 rounded-lg px-3.5 py-1.5">
+                                class="text-white/80 hover:text-white text-xs sm:text-sm font-medium transition border border-white/20 hover:border-white/40 rounded-lg px-2.5 py-1.5 sm:px-3.5">
                                 Keluar
                             </button>
                         </form>
@@ -50,7 +49,7 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {{ $slot }}
     </main>
 
