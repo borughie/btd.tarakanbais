@@ -14,7 +14,7 @@
                     class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-white flex items-center justify-center border-2 border-[#E8C468]/60 overflow-hidden">
                     <img src="{{ asset('img/logo.webp') }}" alt="Logo SD" class="w-full h-full object-contain p-1" />
                 </div>
-                <h1 class="font-['Fraunces',serif] text-white text-2xl font-bold tracking-tight">SD Indo Tionghua
+                <h1 class="font-['Fraunces',serif] text-white text-2xl font-bold tracking-tight">SD Indo Tionghoa
                     Tarakan</h1>
                 <p class="text-[#E8C468] text-[11px] font-semibold uppercase tracking-[0.2em] mt-1.5">Portal Staf
                     &middot; Login Admin</p>

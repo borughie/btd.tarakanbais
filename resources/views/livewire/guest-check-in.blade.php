@@ -16,7 +16,7 @@
                         <img src="{{ asset('img/logo.webp') }}" alt="Logo SD" class="w-full h-full object-contain" />
                     </div>
                 </div>
-                <h1 class="font-['Fraunces',serif] text-white text-2xl font-bold tracking-tight">SD Indo Tionghua
+                <h1 class="font-['Fraunces',serif] text-white text-2xl font-bold tracking-tight">SD Indo Tionghoa
                     Tarakan</h1>
                 <p class="text-[#E8C468] text-[11px] font-semibold uppercase tracking-[0.2em] mt-1.5">Buku Tamu Digital
                 </p>
@@ -138,7 +138,7 @@
         </div>
 
         <p class="text-center text-gray-400 text-[11px] uppercase tracking-wider mt-5">
-            &copy; {{ date('Y') }} SD Indo Tionghua Tarakan &middot; Hak Cipta Dilindungi
+            &copy; {{ date('Y') }} SD Indo Tionghoa Tarakan &middot; Hak Cipta Dilindungi
         </p>
     </div>
 </div>

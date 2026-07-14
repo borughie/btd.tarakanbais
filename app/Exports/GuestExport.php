@@ -146,7 +146,7 @@ class GuestExport implements FromCollection, WithMapping, WithHeadings, WithStyl
         }
 
         $sheet->mergeCells('B1:G1');
-        $sheet->setCellValue('B1', 'SD Indo Tionghua Tarakan');
+        $sheet->setCellValue('B1', 'SD Indo Tionghoa Tarakan');
         $sheet->getStyle('B1')->applyFromArray([
             'font' => ['bold' => true, 'size' => 14, 'color' => ['rgb' => 'B3202E']],
         ]);

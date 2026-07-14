@@ -60,7 +60,7 @@ class GuestExportController extends Controller
         }
 
         $cellInfo = $headerTable->addCell(13500);
-        $cellInfo->addText('SD Indo Tionghua Tarakan', [
+        $cellInfo->addText('SD Indo Tionghoa Tarakan', [
             'bold' => true,
             'size' => 16,
             'color' => 'B3202E',

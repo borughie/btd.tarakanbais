@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'Dashboard Admin' }} - SD Indo Tionghua Tarakan</title>
+    <title>{{ $title ?? 'Dashboard Admin' }} - SD Indo Tionghoa Tarakan</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
@@ -26,7 +26,7 @@
                         <img src="{{ asset('img/logo.webp') }}" alt="Logo SD" class="w-full h-full object-contain p-0.5" />
                     </div>
                     <div class="leading-tight">
-                        <h1 class="font-['Fraunces',serif] text-white font-bold text-base">SD Indo Tionghua Tarakan</h1>
+                        <h1 class="font-['Fraunces',serif] text-white font-bold text-base">SD Indo Tionghoa Tarakan</h1>
                         <p class="text-[#E8C468] text-[10px] font-semibold uppercase tracking-[0.15em] mt-0.5">Dashboard
                             Admin</p>
                     </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'Buku Tamu Digital' }} - SD Indo Tionghua Tarakan</title>
+    <title>{{ $title ?? 'Buku Tamu Digital' }} - SD Indo Tionghoa Tarakan</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link

@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Buku Tamu Digital - SD Indo Tionghua Tarakan</title>
+    <title>Buku Tamu Digital - SD Indo Tionghoa Tarakan</title>
     <style>
         body { font-family: sans-serif; font-size: 12px; color: #333; margin: 0; padding: 20px; }
         .header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 2px solid #B3202E; padding-bottom: 15px; }
@@ -22,7 +22,7 @@
         <img src="{{ public_path('img/logo.png') }}" alt="Logo" class="logo" />
         <div class="header-text">
             <h1>Buku Tamu Digital</h1>
-            <p>SD Indo Tionghua Tarakan</p>
+            <p>SD Indo Tionghoa Tarakan</p>
             <p>Printed: {{ \App\Helpers\DateHelper::formatIndonesian(now()) }}</p>
         </div>
     </div>
@@ -59,7 +59,7 @@
     </table>
 
     <div class="footer">
-        Total: {{ $total }} tamu | SD Indo Tionghua Tarakan &copy; {{ date('Y') }}
+        Total: {{ $total }} tamu | SD Indo Tionghoa Tarakan &copy; {{ date('Y') }}
     </div>
 </body>
 </html>

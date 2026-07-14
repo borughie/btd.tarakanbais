@@ -1,7 +1,7 @@
 <div class="font-['Plus_Jakarta_Sans',sans-serif]">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
         <div>
-            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B3202E] mb-1">SD Indo Tionghua Tarakan
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B3202E] mb-1">SD Indo Tionghoa Tarakan
             </p>
             <h1 class="font-['Fraunces',serif] text-3xl font-bold text-[#241B1B]">Daftar Tamu</h1>
             <p class="text-[#6B5C5C] text-sm mt-1">Kelola data kunjungan tamu</p>
@@ -176,7 +176,7 @@
                             <img src="{{ asset('img/logo.webp') }}" alt="Logo SD" class="w-full h-full object-contain p-0.5" />
                         </div>
                         <p class="text-[#E8C468] text-[11px] font-semibold uppercase tracking-[0.2em] mb-1">SD Indo
-                            Tionghua</p>
+                            Tionghoa</p>
                         <h3 class="font-['Fraunces',serif] text-white text-xl font-bold">QR Code Buku Tamu</h3>
                         <div class="absolute -bottom-3 -left-3 w-6 h-6 bg-white rounded-full"></div>
                         <div class="absolute -bottom-3 -right-3 w-6 h-6 bg-white rounded-full"></div>
