@@ -28,8 +28,8 @@
                             Email
                         </label>
                         <input type="email" id="email" wire:model="email"
-                            class="w-full px-4 py-3 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] placeholder:text-gray-400"
-                            placeholder="admin@sdindotionghua.sch.id" autocomplete="email" />
+                            class="w-full px-4 py-3 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B]"
+                            autocomplete="email" />
                         @error('email')
                             <p class="text-[#B3202E] text-xs mt-1.5">{{ $message }}</p>
                         @enderror
@@ -41,8 +41,8 @@
                             Password
                         </label>
                         <input type="password" id="password" wire:model="password"
-                            class="w-full px-4 py-3 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] placeholder:text-gray-400"
-                            placeholder="Masukkan password" autocomplete="current-password" />
+                            class="w-full px-4 py-3 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B]"
+                            autocomplete="current-password" />
                         @error('password')
                             <p class="text-[#B3202E] text-xs mt-1.5">{{ $message }}</p>
                         @enderror
