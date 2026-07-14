@@ -31,21 +31,19 @@
         <thead>
             <tr>
                 <th class="center" style="width:4%">No</th>
-                <th style="width:16%">Tanggal</th>
-                <th style="width:12%">Jam</th>
+                <th style="width:24%">Waktu Kunjungan</th>
                 <th style="width:18%">Instansi</th>
-                <th style="width:22%">Tujuan</th>
+                <th style="width:24%">Tujuan</th>
                 <th class="center" style="width:6%">Personil</th>
                 <th style="width:12%">PIC</th>
-                <th style="width:10%">No. HP</th>
+                <th style="width:12%">No. HP</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($guests as $i => $guest)
                 <tr>
                     <td class="center">{{ $i + 1 }}</td>
-                    <td>{{ \App\Helpers\DateHelper::formatDate($guest->tanggal_kunjungan) }}</td>
-                    <td>{{ \App\Helpers\DateHelper::formatTime($guest->jam_kunjungan) }}</td>
+                    <td>{{ \App\Helpers\DateHelper::formatDateTime($guest->tanggal_kunjungan, $guest->jam_kunjungan) }}</td>
                     <td>{{ $guest->instansi }}</td>
                     <td>{{ $guest->tujuan }}</td>
                     <td class="center">{{ $guest->jumlah_personil }}</td>

@@ -100,8 +100,7 @@ class GuestExportController extends Controller
         // Widths for portrait mode (~9,000 twip content width after margins)
         $columnWidths = [
             'No' => 500,
-            'Tanggal' => 1400,
-            'Jam' => 1100,
+            'Waktu' => 2500,
             'Instansi' => 1800,
             'Tujuan' => 2200,
             'Personil' => 700,
@@ -117,8 +116,7 @@ class GuestExportController extends Controller
         foreach ($guests as $i => $guest) {
             $table->addRow();
             $table->addCell($columnWidths['No'], $cellStyle)->addText((string) ($i + 1));
-            $table->addCell($columnWidths['Tanggal'], $cellStyle)->addText(DateHelper::formatDate($guest->tanggal_kunjungan));
-            $table->addCell($columnWidths['Jam'], $cellStyle)->addText(DateHelper::formatTime($guest->jam_kunjungan));
+            $table->addCell($columnWidths['Waktu'], $cellStyle)->addText(DateHelper::formatDateTime($guest->tanggal_kunjungan, $guest->jam_kunjungan));
             $table->addCell($columnWidths['Instansi'], $cellStyle)->addText($guest->instansi);
             $table->addCell($columnWidths['Tujuan'], $cellStyle)->addText($guest->tujuan);
             $table->addCell($columnWidths['Personil'], $cellStyle)->addText((string) $guest->jumlah_personil);

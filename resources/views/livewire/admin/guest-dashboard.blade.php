@@ -78,8 +78,7 @@
                 <thead class="bg-[#FBEAEA]/50">
                     <tr>
                         <th class="px-4 py-3 text-center text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">No</th>
-                        <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Tanggal</th>
-                        <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Jam</th>
+                        <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Waktu Kunjungan</th>
                         <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Instansi</th>
                         <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Tujuan</th>
                         <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Personil</th>
@@ -95,10 +94,7 @@
                                 {{ ($guests->currentPage() - 1) * $guests->perPage() + $i + 1 }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6B5C5C]">
-                                {{ \App\Helpers\DateHelper::formatDate($guest->tanggal_kunjungan) }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-[#6B5C5C]">
-                                {{ \App\Helpers\DateHelper::formatTime($guest->jam_kunjungan) }}
+                                {{ \App\Helpers\DateHelper::formatDateTime($guest->tanggal_kunjungan, $guest->jam_kunjungan) }}
                             </td>
                             <td class="px-6 py-4 text-sm font-semibold text-[#241B1B]">
                                 {{ $guest->instansi }}
@@ -124,7 +120,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="px-6 py-16 text-center">
+                            <td colspan="8" class="px-6 py-16 text-center">
                                 <div class="text-[#6B5C5C]">
                                     <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#FBEAEA] flex items-center justify-center">
                                         <svg class="w-7 h-7 text-[#B3202E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,7 +144,7 @@
                     <div class="flex items-start justify-between mb-2">
                         <div class="flex-1 min-w-0">
                             <p class="font-semibold text-[#241B1B] text-sm truncate">{{ $guest->instansi }}</p>
-                            <p class="text-xs text-[#6B5C5C] mt-0.5">{{ \App\Helpers\DateHelper::formatDate($guest->tanggal_kunjungan) }} &middot; {{ \App\Helpers\DateHelper::formatTime($guest->jam_kunjungan) }}</p>
+                            <p class="text-xs text-[#6B5C5C] mt-0.5">{{ \App\Helpers\DateHelper::formatDateTime($guest->tanggal_kunjungan, $guest->jam_kunjungan) }}</p>
                         </div>
                         <span
                             class="shrink-0 ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold {{ $guest->notified ? 'bg-[#FBF3DC] text-[#8A6D1D] border border-[#E8C468]/50' : 'bg-gray-50 text-gray-500 border border-gray-200' }}">

@@ -85,6 +85,6 @@ class DateHelper
 
     public static function formatDateTime(?string $date, ?string $time): string
     {
-        return self::formatDate($date) . ' - ' . self::formatTime($time);
+        return self::formatDate($date) . ', Jam ' . self::formatTime($time);
     }
 }
