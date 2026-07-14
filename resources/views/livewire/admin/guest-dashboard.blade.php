@@ -1,4 +1,17 @@
-<div class="font-['Plus_Jakarta_Sans',sans-serif]">
+<div class="font-['Plus_Jakarta_Sans',sans-serif]" x-data="{ saved: false }"
+    @saved.window="saved = true; setTimeout(() => saved = false, 3000)">
+
+    @if (session('success'))
+        <div class="mb-4 px-4 py-3 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-medium">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div x-show="saved" x-transition
+        class="mb-4 px-4 py-3 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-medium">
+        Berhasil disimpan.
+    </div>
+
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
         <div>
             <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#B3202E] mb-1">SD Indo Tionghoa Tarakan
@@ -85,6 +98,7 @@
                         <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">PIC</th>
                         <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">No. HP</th>
                         <th class="px-6 py-3 text-left text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-center text-[11px] font-semibold text-[#6B5C5C] uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-[#B3202E]/6">
@@ -117,10 +131,28 @@
                                     {{ $guest->notified ? 'Telegram ✓' : 'Belum Notif' }}
                                 </span>
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center justify-center gap-1">
+                                    <button wire:click="editGuest({{ $guest->id }})"
+                                        class="p-1.5 rounded-lg text-[#2B579A] hover:bg-[#2B579A]/10 transition" title="Edit">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </button>
+                                    <button wire:click="confirmDelete({{ $guest->id }})"
+                                        class="p-1.5 rounded-lg text-[#B3202E] hover:bg-[#B3202E]/10 transition" title="Hapus">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="px-6 py-16 text-center">
+                            <td colspan="9" class="px-6 py-16 text-center">
                                 <div class="text-[#6B5C5C]">
                                     <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-[#FBEAEA] flex items-center justify-center">
                                         <svg class="w-7 h-7 text-[#B3202E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,10 +178,26 @@
                             <p class="font-semibold text-[#241B1B] text-sm truncate">{{ $guest->instansi }}</p>
                             <p class="text-xs text-[#6B5C5C] mt-0.5">{{ \App\Helpers\DateHelper::formatDateTime($guest->tanggal_kunjungan, $guest->jam_kunjungan) }}</p>
                         </div>
-                        <span
-                            class="shrink-0 ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold {{ $guest->notified ? 'bg-[#FBF3DC] text-[#8A6D1D] border border-[#E8C468]/50' : 'bg-gray-50 text-gray-500 border border-gray-200' }}">
-                            {{ $guest->notified ? '✓' : '—' }}
-                        </span>
+                        <div class="flex items-center gap-1 shrink-0 ml-2">
+                            <span
+                                class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold {{ $guest->notified ? 'bg-[#FBF3DC] text-[#8A6D1D] border border-[#E8C468]/50' : 'bg-gray-50 text-gray-500 border border-gray-200' }}">
+                                {{ $guest->notified ? '✓' : '—' }}
+                            </span>
+                            <button wire:click="editGuest({{ $guest->id }})"
+                                class="p-1.5 rounded-lg text-[#2B579A] hover:bg-[#2B579A]/10 transition" title="Edit">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </button>
+                            <button wire:click="confirmDelete({{ $guest->id }})"
+                                class="p-1.5 rounded-lg text-[#B3202E] hover:bg-[#B3202E]/10 transition" title="Hapus">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <p class="text-xs text-[#6B5C5C] mb-2 line-clamp-2">{{ $guest->tujuan }}</p>
                     <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6B5C5C]">
@@ -185,6 +233,117 @@
         @endif
     </div>
 
+    {{-- Edit Modal --}}
+    @if ($showEditModal)
+        <div class="fixed inset-0 z-50 overflow-y-auto" wire:click="cancelEdit">
+            <div class="flex items-center justify-center min-h-screen px-4">
+                <div class="fixed inset-0 bg-[#241B1B]/60 backdrop-blur-sm transition-opacity"></div>
+                <div class="relative bg-white rounded-[28px] shadow-2xl max-w-lg w-full overflow-hidden" wire:click.stop>
+                    <div class="bg-linear-to-br from-[#2B579A] to-[#1E3F6F] px-6 py-5 text-center">
+                        <h3 class="font-['Fraunces',serif] text-white text-xl font-bold">Edit Data Tamu</h3>
+                    </div>
+
+                    <form wire:submit="updateGuest" class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">Instansi <span class="text-[#B3202E]">*</span></label>
+                            <input type="text" wire:model="edit_instansi"
+                                class="w-full px-4 py-2.5 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] text-sm" />
+                            @error('edit_instansi') <p class="text-[#B3202E] text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">Tujuan <span class="text-[#B3202E]">*</span></label>
+                            <textarea wire:model="edit_tujuan" rows="2"
+                                class="w-full px-4 py-2.5 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none resize-none text-[#241B1B] text-sm"></textarea>
+                            @error('edit_tujuan') <p class="text-[#B3202E] text-xs mt-1">{{ $message }}</p> @enderror
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">Tanggal Kunjungan <span class="text-[#B3202E]">*</span></label>
+                                <input type="date" wire:model="edit_tanggal_kunjungan"
+                                    class="w-full px-4 py-2.5 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] text-sm" />
+                                @error('edit_tanggal_kunjungan') <p class="text-[#B3202E] text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">Jam Kunjungan <span class="text-[#B3202E]">*</span></label>
+                                <input type="time" wire:model="edit_jam_kunjungan"
+                                    class="w-full px-4 py-2.5 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] text-sm" />
+                                @error('edit_jam_kunjungan') <p class="text-[#B3202E] text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">Personil</label>
+                                <input type="number" wire:model="edit_jumlah_personil" min="1"
+                                    class="w-full px-4 py-2.5 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] text-sm" />
+                                @error('edit_jumlah_personil') <p class="text-[#B3202E] text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">PIC</label>
+                                <input type="text" wire:model="edit_nama_pic"
+                                    class="w-full px-4 py-2.5 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] text-sm" />
+                                @error('edit_nama_pic') <p class="text-[#B3202E] text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold uppercase tracking-wider text-[#6B5C5C] mb-1.5">No. HP</label>
+                                <input type="text" wire:model="edit_no_hp"
+                                    class="w-full px-4 py-2.5 border border-[#B3202E]/15 rounded-xl focus:ring-2 focus:ring-[#B3202E]/40 focus:border-[#B3202E] transition duration-200 outline-none text-[#241B1B] text-sm" />
+                                @error('edit_no_hp') <p class="text-[#B3202E] text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 pt-2">
+                            <button type="button" wire:click="cancelEdit"
+                                class="flex-1 border-2 border-[#6B5C5C]/20 text-[#6B5C5C] hover:bg-gray-50 font-semibold text-sm py-2.5 px-4 rounded-xl transition">
+                                Batal
+                            </button>
+                            <button type="submit" wire:loading.attr="disabled"
+                                class="flex-1 bg-[#2B579A] hover:bg-[#1E3F6F] disabled:bg-[#2B579A]/50 text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition shadow-md">
+                                <span wire:loading.remove wire:target="updateGuest">Simpan</span>
+                                <span wire:loading wire:target="updateGuest">Menyimpan...</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    {{-- Delete Confirmation Modal --}}
+    @if ($showDeleteModal)
+        <div class="fixed inset-0 z-50 overflow-y-auto" wire:click="cancelDelete">
+            <div class="flex items-center justify-center min-h-screen px-4">
+                <div class="fixed inset-0 bg-[#241B1B]/60 backdrop-blur-sm transition-opacity"></div>
+                <div class="relative bg-white rounded-[28px] shadow-2xl max-w-sm w-full overflow-hidden" wire:click.stop>
+                    <div class="p-6 text-center">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-[#B3202E]/10 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-[#B3202E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-['Fraunces',serif] text-lg font-bold text-[#241B1B] mb-2">Hapus Data Tamu?</h3>
+                        <p class="text-[#6B5C5C] text-sm mb-6">Data yang dihapus tidak dapat dikembalikan.</p>
+                        <div class="flex gap-3">
+                            <button wire:click="cancelDelete"
+                                class="flex-1 border-2 border-[#6B5C5C]/20 text-[#6B5C5C] hover:bg-gray-50 font-semibold text-sm py-2.5 px-4 rounded-xl transition">
+                                Batal
+                            </button>
+                            <button wire:click="deleteGuest" wire:loading.attr="disabled"
+                                class="flex-1 bg-[#B3202E] hover:bg-[#7A1620] disabled:bg-[#B3202E]/50 text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition shadow-md">
+                                <span wire:loading.remove wire:target="deleteGuest">Hapus</span>
+                                <span wire:loading wire:target="deleteGuest">Menghapus...</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    {{-- QR Modal --}}
     @if ($showQrModal)
         <div class="fixed inset-0 z-50 overflow-y-auto" wire:click="toggleQrModal">
             <div class="flex items-center justify-center min-h-screen px-4">
